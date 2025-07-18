@@ -64,7 +64,9 @@ export default function Cadastro() {
             }
             await api.post("/user", envio);
 
-            if (confirm("Cadastro realizado!")){}
+            if (confirm("Cadastro realizado!")){
+                router.push("/");
+            }
 
         } catch (error) {
             if (error instanceof ZodError) {

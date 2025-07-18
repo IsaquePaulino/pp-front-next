@@ -14,7 +14,7 @@ const PostSchema = z.object({
   foto: z.string().url(),
 });
 
-export default function Post() {
+export default function Postar() {
 
   const [foto, setFoto] = useState("");
   const [description, setDescription] = useState("");
