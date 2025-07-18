@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api"; // Importe a instância da API
 import { AxiosError } from "axios";
-import { Post } from "../../components/Post"; // Importe o componente Post
+import { Post } from "@/components/Post";
 import { Sidebar } from "../../components/Sidebar"; // Importe a Sidebar
 
 // Defina a interface para o tipo de dado que você espera para cada post
