@@ -30,20 +30,18 @@ export default function FeedPage() {
     async function fetchPosts() {
       try {
         setLoading(true);
-        setError(null); // Limpa erros anteriores
+        setError(null);
 
-        // <<< CORRIGIDO: Endpoint agora é '/feed' >>>
         const response = await api.get('/feed'); 
         
-        // O backend retorna { posts: [...] }, então acesse response.data.posts
-        // E mapeie os nomes dos campos do backend para os nomes esperados no frontend (PostData)
+
         const fetchedPosts = response.data.posts.map((item: any) => ({
-          id: item.post_id, // Mapeia post_id do backend para id no frontend
+          id: item.post_id,
           foto: item.foto,
           description: item.description,
-          createdAt: item.posted_at, // Mapeia posted_at do backend para createdAt no frontend
+          createdAt: item.posted_at,
           author: {
-            username: item.username, // Pega o username do autor
+            username: item.username,
           },
         }));
 
@@ -77,7 +75,6 @@ export default function FeedPage() {
         {loading && (
           <div className="flex justify-center items-center h-48">
             <p>Carregando posts...</p>
-            {/* Você pode adicionar um spinner de loading aqui */}
           </div>
         )}
 

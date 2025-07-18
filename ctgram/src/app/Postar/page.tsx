@@ -7,7 +7,7 @@ import { api } from "@/services/api";
 import { AxiosError } from "axios";
 import { z, ZodError } from "zod";
 import type React from "react";
-import { useRouter } from "next/navigation"; // usePathname e useSearchParams não são estritamente necessários para o login básico aqui
+import { useRouter } from "next/navigation";
 
 const PostSchema = z.object({
   description: z.string().max(200, { message: "A descrição deve ter no máximo 200 caracteres." }).optional().nullable(),
@@ -23,30 +23,28 @@ export default function Postar() {
   const router = useRouter();
 
 async function onSubmit(e: React.FormEvent) {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
+    e.preventDefault();
     try {
       setIsLoading(true);
-      // Valida os dados do formulário com Zod
+
       const data = PostSchema.parse({
         foto,
         description,
       });
       console.log('DEBUG Frontend: Dados sendo enviados para o backend:', data);
-console.log('DEBUG Frontend: Verificando token JWT no localStorage:', localStorage.getItem('authToken')); // Verifique se o token existe
-      // Faz a requisição POST para o endpoint de login da sua API
-      // ALERTA: Verifique qual é o endpoint real de login no seu backend (ex: /auth/login, /login)
-      await api.post("/post", data); // Usando /auth/login como exemplo
+console.log('DEBUG Frontend: Verificando token JWT no localStorage:', localStorage.getItem('authToken'));
 
-      // Se o login for bem-sucedido:
+      await api.post("/post", data);
+
       alert("Foto publicada com sucesso!");
-      router.push("/Feed"); // Redireciona para uma página protegida (ex: /Postar)
+      router.push("/Feed");
 
     } catch (error) {
-      // Trata erros de validação do Zod no frontend
+
       if (error instanceof ZodError) {
         return alert(error.issues[0].message);
       }
-      // Trata erros da API (AxiosError)
+
       if (error instanceof AxiosError && error.response) {
         const backendMessage = (error.response.data as { message?: string | string[] })?.message;
         if (Array.isArray(backendMessage)) {
@@ -55,7 +53,7 @@ console.log('DEBUG Frontend: Verificando token JWT no localStorage:', localStora
             alert(`Erro ao postar: ${backendMessage || "Erro desconhecido do servidor."}`);
         }
       } else {
-        // Para outros tipos de erro (rede, etc.)
+
         alert(`Não foi possível postar! Erro inesperado: ${error instanceof Error ? error.message : "Desconhecido"}`);
       }
     } finally {

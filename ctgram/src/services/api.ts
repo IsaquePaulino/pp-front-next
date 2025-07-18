@@ -5,13 +5,12 @@ export const api = axios.create({
 })
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken"); // Recupera o token do localStorage
+    const token = localStorage.getItem("authToken");
     
-    // Console.log para depuração (pode remover depois que funcionar)
     console.log('DEBUG Interceptor: Tentando anexar token. Token lido do localStorage:', token ? token.substring(0, 30) + '...' : 'NÃO ENCONTRADO'); 
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Adiciona o token ao cabeçalho Authorization
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
