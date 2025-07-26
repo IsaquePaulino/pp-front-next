@@ -38,7 +38,7 @@ export default function FeedPage() {
             }
         }
 
-        FeedPage()
+        carregandoPosts()
     }, []);
 
     return (
