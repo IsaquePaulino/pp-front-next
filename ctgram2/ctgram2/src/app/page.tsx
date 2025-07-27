@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 
 
 import { toast } from "sonner";
-import { useState } from "react";
-import { z } from "zod";
 import Cookies from "js-cookie";
 
 
@@ -28,7 +26,7 @@ export default function Login() {
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      senha: "",
+      password: "",
       email: "",
     },
   });
@@ -53,7 +51,7 @@ export default function Login() {
       <main id="box">
         <Image src="https://www.ctjunior.com.br/images/logo/logo-branca-reta-noSlogan.svg" width={300} height={120.75} alt="" className="pb-5" />
         <form id="login" onSubmit={handleSubmit(handleLogin)} className="w-full flex gap-y-3 flex-col items-center">
-          <div className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md ">
+          <div className="w-70 text-gray-80w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md0 bg-orange-200 border-2 border-orange-700 rounded-md ">
             <Input
               required
               type="email"
@@ -65,19 +63,19 @@ export default function Login() {
               required
               type="password"
               placeholder="senha"
-              {...register("senha")} />
+              {...register("password")} />
           </div>
-        
+        {errors.password?.message && <span>{errors.password.message}</span>}
         <div id="box">
           <Button type="submit"
             disabled={isLoading}
-            className="flex items-center justify-center w-50 h-10 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
+            className="flex items-center justify-center py-5 px-15 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
             Fazer login</Button>
 
           <h1 className="pt-5 text-xs">Ainda não tem uma conta?</h1>
 
           <Button onClick={() => router.push("/cadastro")}
-            className="flex items-center justify-center w-50 h-10 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
+            className="flex items-center justify-center py-5 px-13.5 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
             Cadastre-se</Button>
         </div>
         </form>

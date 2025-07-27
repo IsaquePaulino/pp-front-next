@@ -3,8 +3,8 @@ import { toast } from "sonner";
 import { criaConta } from "./cria_conta";
 async function handleCadastro(data: CadastroSchema) {
     try {
-      const { senha, confirma_senha } = data;
-      if (senha !== confirma_senha) {
+      const { password, confirm_password } = data;
+      if (password !== confirm_password) {
         console.info({error: "Senha e confirmar senha são diferentes."})
         toast.error("Senha e confirmar senha são diferentes.");
         return;

@@ -1,10 +1,10 @@
 import { z } from "zod"
 
 export const cadastroSchema = z.object({
-  senha: z.string().nonempty(),
+  password: z.string().nonempty(),
   email: z.string().nonempty(),
-  confirma_senha: z.string().nonempty(),
-  nome: z.string(),
+  confirm_password: z.string().nonempty(),
+  username: z.string(),
 });
 
 export type CadastroSchema = z.infer<typeof cadastroSchema>;

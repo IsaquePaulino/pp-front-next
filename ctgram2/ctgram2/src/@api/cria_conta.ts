@@ -3,12 +3,12 @@ import { CadastroSchema } from "@/@types/cadastro"
 import { api } from "@/lib/api"
 import { AxiosError } from "axios"
 
-export async function criaConta({ senha, email, nome }: CadastroSchema) {
+export async function criaConta({ password, email, username }: CadastroSchema) {
   try {
     await api.post("/user", {
       email,
-      nome,
-      senha,
+      username,
+      password,
       foto_link: null
     })
 
