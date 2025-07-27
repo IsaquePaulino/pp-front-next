@@ -1,4 +1,4 @@
-import { AppSidebar } from "./ui/sidebar";
+import { AppSidebar } from "./appsidebar";
 import { SidebarProvider, SidebarTrigger } from "./ui/sidebar";
 
 export function Menu({ children }: { children: React.ReactNode }) {

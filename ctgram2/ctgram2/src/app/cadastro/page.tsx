@@ -22,16 +22,17 @@ export default function cadastro() {
     } = useForm<CadastroSchema>({
         resolver: zodResolver(cadastroSchema),
         defaultValues: {
-            senha: "",
+            password: "",
             email: "",
-            confirma_senha: "",
-            nome: "",
+            confirm_password: "",
+            username: "",
         },
     });
     async function handleCadastro(data: CadastroSchema) {
+        console.log('DEBUG: handleCadastro acionada com dados:', data);
         try {
-            const { senha, confirma_senha } = data;
-            if (senha !== confirma_senha) {
+            const { password, confirm_password } = data;
+            if (password !== confirm_password) {
                 console.info({ error: "Senha e confirmar senha são diferentes." })
                 toast.error("Senha e confirmar senha são diferentes.");
                 return;
@@ -43,19 +44,23 @@ export default function cadastro() {
                 return;
             }
             toast.success("Cadastro realizado!");
-        } catch { }
+        } catch {
+            const errorMessage = errors instanceof Error ? errors.message : "Erro inesperado ao cadastrar."
+            console.error("DEBUG: Erro na chamada da API de cadastro:", errorMessage, errors); // Log detalhado
+            toast.error(`Falha no cadastro: ${errorMessage}`);
+        }
     }
     return (
         <div id="inicial">
             <main id="box">
                 <Image src="https://www.ctjunior.com.br/images/logo/logo-branca-reta-noSlogan.svg" width={300} height={120.75} alt="" className="pb-5" />
-                <form onSubmit={handleSubmit(handleCadastro)} className="w-full flex gap-y-5 flex-col items-center">
+                <form id="cadastro" onSubmit={handleSubmit(handleCadastro)} className="w-full flex gap-y-5 flex-col items-center">
                     <div className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md ">
                         <Input
                             required
                             type="text"
                             placeholder="nome"
-                            {...register("nome")} />
+                            {...register("username")} />
                     </div>
 
                     <div className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md ">
@@ -63,7 +68,7 @@ export default function cadastro() {
                             required
                             type="email"
                             placeholder="seu@email.com"
-                            {...register("email")}/>
+                            {...register("email")} />
                     </div>
 
                     <div className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md">
@@ -71,7 +76,7 @@ export default function cadastro() {
                             required
                             type="password"
                             placeholder="senha"
-                            {...register("senha")}/>
+                            {...register("password")} />
                     </div>
 
                     <div className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md">
@@ -79,22 +84,22 @@ export default function cadastro() {
                             required
                             type="password"
                             placeholder="confirme sua senha"
-                            {...register("confirma_senha")}/>
+                            {...register("confirm_password")} />
                     </div>
 
-                    {errors.nome?.message && <span>{errors.nome.message}</span>}
+                    {errors.username?.message && <span>{errors.username.message}</span>}
                     {errors.email?.message && <span>{errors.email.message}</span>}
-                    {errors.senha?.message && <span>{errors.senha.message}</span>}
-                    {errors.confirma_senha?.message && <span>{errors.confirma_senha.message}</span>}
-                    
+                    {errors.password?.message && <span>{errors.password.message}</span>}
+                    {errors.confirm_password?.message && <span>{errors.confirm_password.message}</span>}
+
                     <Button type="submit"
-                    disabled = {isLoading}
-                    form="cadastro"
-                        className="flex items-center justify-center w-50 h-10 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
+                        disabled={isLoading}
+                        form="cadastro"
+                        className="flex items-center justify-center py-5 px-14.5 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg">
                         Cadastro</Button>
 
                     <Button onClick={() => router.push("/")}
-                        className="flex items-center justify-center w-50 h-10 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg"
+                        className="flex items-center justify-center py-5 px-11 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg"
                     >Ir para Login</Button>
                 </form>
             </main>

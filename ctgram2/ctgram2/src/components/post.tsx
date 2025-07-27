@@ -27,7 +27,7 @@ const deletePostSchema = z.object({
 
 export type DeletePostSchema = z.infer<typeof deletePostSchema>
 
-export function Posts({
+export function PostCard({
     post,
     username,
     user_foto,
@@ -90,7 +90,7 @@ export function Posts({
 
     return (
         <div id="card" className="flex flex-col">
-            <div className="p-3 rounded-tl-lg rounded-tr-lg border-r border-l border-t pt-4 flex justify-between items-center max-w-xl w-full">
+            <div className="bg-black p-3 rounded-tl-lg rounded-tr-lg border-r border-l border-t pt-4 flex justify-between items-center max-w-xl w-full">
                 <Image
                     src={user_foto ?? userDefaultPic}
                     height={100}
@@ -98,9 +98,9 @@ export function Posts({
                     alt="Foto de perfil"
                     className="h-8 w-8 rounded-full"
                 />
-                <Popover>
+                <Popover >
                     <PopoverTrigger asChild>
-                        <DotsThreeVertical className="cursor-pointer text-2xl" />
+                        <DotsThreeVertical className="text-white cursor-pointer text-2xl" />
                     </PopoverTrigger>
                     <PopoverContent className="w-80">
                         <div className="flex flex-col w-full gap-4">
@@ -140,12 +140,12 @@ export function Posts({
                 alt="Foto"
                 width={400}
                 height={400}
-                className="border w-sm md:w-xl h-auto max-h-[450px] object-cover bg-orange-50"
+                className="border-2 w-sm md:w-xl h-auto max-h-[450px] object-cover bg-orange-300"
             />
-            <div className="p-3 rounded-bl-lg rounded-br-lg border-r border-l border-b pb-4 flex items-start w-full max-w-xl">
-                <span className="font-medium text-lg text-justify italic">{username}{' '}
+            <div className="bg-black p-3 rounded-bl-lg rounded-br-lg border-r border-l border-b pb-4 flex items-start w-full max-w-xl">
+                <span className="text-white font-medium text-lg text-justify italic">{username}{' '}
                     {post.description && (
-                        <span className="text-lg font-normal not-italic break-words ml-1">
+                        <span className="text-white text-lg font-normal not-italic break-words ml-1">
                             {post.description.length > 145
                                 ? post.description.substring(0, 142).concat('...')
                                 : post.description}

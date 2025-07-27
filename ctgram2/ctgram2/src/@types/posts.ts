@@ -1,7 +1,7 @@
 export type Post = {
-    nome: string,
+    username: string,
     foto: string,
-    descricao: string | null,
-    foto_perfil: string | null,
+    description: string | null,
+    user_foto: string | null,
     post_id: string
 }
