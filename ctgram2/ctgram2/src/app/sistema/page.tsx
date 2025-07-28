@@ -49,7 +49,7 @@ export default function Feed() {
                                 <div key={item.post_id} className="flex flex-col">
                                     <div id="header"
                                         className="bg-black p-3 rounded-tl-lg rounded-tr-lg border-r border-l border-t pt-4
-                        flex justify-between items-center max-w-xl w-full">
+                        flex items-start gap-3 max-w-xl w-full">
                                         <Image
                                             src={item.user_foto === null ? userDefaultPic : item.user_foto}
                                             height={100}
@@ -65,11 +65,11 @@ export default function Feed() {
                                         width={400}
                                         height={400}
                                         priority
-                                        className="border w-sm md:w-xl h-auto max-h-[450px] object-cover  border-orange-300"
+                                        className="w-sm md:w-xl h-auto max-h-[450px] object-cover"
                                     />
                                     <div id="footer" className="bg-black p-3 rounded-bl-lg rounded-br-lg border-r border-l 
                         border-b pb-4 flex items-start w-full max-w-xl">
-                                        <span className="font-medium text-lg italic text-white">{item.username}{' '}
+                                        <span className="font-medium text-lg italic text-white">{' '}
                                             {
                                                 item.description !== null &&
                                                 <span className="text-lg font-normal not-italic break-words">{item.description.length > 145

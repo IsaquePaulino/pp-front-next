@@ -11,14 +11,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Menu } from "@/components/menu";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { changeProfilePicture } from "@/@api/change-profile-picture";
 import { PostCard } from "@/components/post";
 
 const changePictureSchema = z.object({
-    user_foto: z.string().url().nonempty()
+    user_foto: z.string().trim().nonempty()
 })
 
 export type ChangePictureSchema = z.infer<typeof changePictureSchema>
@@ -62,6 +61,7 @@ export default function MeuPefil() {
     }
 
     async function handleChangePhoto(data: ChangePictureSchema) {
+        console.log("Valor de user_foto ANTES da validação da API:", data.user_foto);
         try {
             const token = Cookies.get("token")
             if (token) {
@@ -108,7 +108,7 @@ export default function MeuPefil() {
                                         type="submit"
                                         
                                         disabled={isSubmitting}
-                                        className="flex items-center //justify-center py-5 px-13.5 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg cursor-pointer"
+                                        className="flex items-center justify-center py-5 px-13.5 bg-orange-500 rounded-md text-white hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg cursor-pointer"
                                     >Trocar foto</Button>
                                 </form>
                                 {me.posts?.map((item) => (
