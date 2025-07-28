@@ -1,5 +1,6 @@
 'use client'
 import { Menu } from "@/components/menu";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldErrors, useForm } from "react-hook-form";
@@ -45,7 +46,38 @@ export default function CreatePost() {
 
     return (
         <Menu>
-            <div className="w-full flex flex-col items-center justify-center h-screen">
+            <div className="w-full h-screen flex justify-center items-center align-middle">
+                <main className="bg-black p-10 rounded-md  border-2 border-orange-400">
+                    
+                     <form id="postar" onSubmit={handleSubmit(handleCreatePost, handleErrorOnPostPhoto)} className="w-full flex flex-col gap-5 items-center">
+                      <h1 className="text-white text-4xl"><strong>Postar nova foto</strong></h1>
+                    <div>
+                    <h2 className="text-white justify-items-start">Link para nova foto</h2>
+                    <Input 
+                        required
+                        className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md"
+                        type="text"
+                        placeholder="Link da imagem"
+                        {...register("foto_link")} />
+                    </div>
+                    <div>
+                    <h2 className="pt-5 text-white">Descrição</h2>
+                    <Input
+                        className="w-70 text-gray-800 bg-orange-200 border-2 border-orange-700 rounded-md"
+                        type="text"
+                        placeholder="Descrição (opcional)"
+                        {...register("descricao")}/>
+                    </div>
+                    <Button 
+                    className="flex items-center justify-center py-5 px-13.5 bg-orange-500 rounded-md text-white cursor-pointer hover:bg-orange-300 transition ease-linear disabled:opacity-50 disabled:cursor-auto text-lg"
+                    type="submit" 
+                    form="postar"
+                    disabled={isSubmitting}
+                    >Postar</Button>
+                    </form>
+                </main>
+            </div>
+            {/* <div className="w-full flex flex-col items-center justify-center h-screen">
                 <Card className="w-full max-w-sm gap-4 py-8">
                     <CardHeader>
                         <CardTitle>Postar</CardTitle>
@@ -78,7 +110,7 @@ export default function CreatePost() {
                         >Postar</Button>
                     </CardFooter>
                 </Card>
-            </div>
+            </div> */}
         </Menu>
     )
 }

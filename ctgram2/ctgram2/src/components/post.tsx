@@ -140,10 +140,10 @@ export function PostCard({
                 alt="Foto"
                 width={400}
                 height={400}
-                className="border-2 w-sm md:w-xl h-auto max-h-[450px] object-cover bg-orange-300"
+                className=" w-sm md:w-xl h-auto max-h-[450px] object-cover"
             />
             <div className="bg-black p-3 rounded-bl-lg rounded-br-lg border-r border-l border-b pb-4 flex items-start w-full max-w-xl">
-                <span className="text-white font-medium text-lg text-justify italic">{username}{' '}
+                <span className="text-white font-medium text-lg text-justify italic">{' '}
                     {post.description && (
                         <span className="text-white text-lg font-normal not-italic break-words ml-1">
                             {post.description.length > 145

@@ -1,9 +1,9 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: "http://localhost:3331"
+    baseURL: "https://backend-pp-2025-1.onrender.com"
 })
-api.interceptors.request.use(
+/*api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("authToken");
     
@@ -17,4 +17,4 @@ api.interceptors.request.use(
   (error) => {
     return Promise.reject(error);
   }
-);
+);*/
